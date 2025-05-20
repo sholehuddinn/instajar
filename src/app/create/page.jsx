@@ -4,33 +4,38 @@ import { useEffect, useState } from "react";
 import { Camera } from "lucide-react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import  jwt  from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
-const page = () => {
+const Page = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isPosting, setIsPosting] = useState(false);
-
-  const [userId, setUserId] = useState("")
-
-  const token = localStorage.getItem("TokenInstajar")
-
-  const payload = jwt.decode(token)
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
 
   const router = useRouter();
 
-  if(!token) {
-    router.push("/login")
-    Swal.fire("warning", "Silahkan Login Terlebih Dahulu", "warning")
-  }
-
-  // console.log(payload)
-
   useEffect(() => {
-    setUserId(payload.userId)
-  }, [token])
- 
+    const storedToken = localStorage.getItem("TokenInstajar");
+
+    if (!storedToken) {
+      Swal.fire("Warning", "Silakan login terlebih dahulu", "warning");
+      router.push("/login");
+      return;
+    }
+
+    const payload = jwt.decode(storedToken);
+
+    setUserId(payload?.userId); // pakai optional chaining
+    setToken(storedToken);
+  }, []);
+
   const handleSubmit = async () => {
+    if (!token || !userId) {
+      Swal.fire("Error", "User belum dikenali. Silakan login ulang.", "error");
+      return;
+    }
+
     setIsPosting(true);
 
     try {
@@ -40,7 +45,7 @@ const page = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             id_user: userId,
@@ -77,15 +82,10 @@ const page = () => {
     }
   };
 
-  const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
-    setIsPreviewVisible(e.target.value !== "");
-  };
-
   return (
-    <div className="flex flex-col items-center w-full max-w-xl mx-auto bg-white ">
+    <div className="flex flex-col items-center w-full max-w-xl mx-auto bg-white">
       {/* Header */}
-      <div className="w-full p-4 bg-gradient-to-r from-cyan-500 to-blue-500  text-white flex justify-between items-center rounded-t-lg">
+      <div className="w-full p-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white flex justify-between items-center rounded-t-lg">
         <div className="flex items-center">
           <Camera className="mr-2" size={24} />
           <h1 className="text-xl font-bold">Buat Postingan Baru</h1>
@@ -94,7 +94,7 @@ const page = () => {
 
       {/* Form */}
       <div className="w-full p-4 border rounded-sm border-gray-300">
-        {/* Title Field */}
+        {/* Title */}
         <div className="mb-4">
           <label
             htmlFor="title"
@@ -112,7 +112,7 @@ const page = () => {
           />
         </div>
 
-        {/* Content Field */}
+        {/* Content */}
         <div className="mb-4">
           <label
             htmlFor="content"
@@ -129,9 +129,7 @@ const page = () => {
           />
         </div>
 
-        
-
-        {/* Submit Button */}
+        {/* Submit */}
         <button
           onClick={handleSubmit}
           disabled={isPosting}
@@ -148,4 +146,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
