@@ -5,7 +5,15 @@ import Head from "@/components/header";
 import Nav from "@/components/footer";
 import "./globals.css";
 
-// Daftar segmen yang tidak ingin menampilkan layout
+
+export const metadata = {
+  title: "instajar",
+  description: "bla bla bla",
+  icons: {
+    icon: "/image/aku2.jpg",
+  },
+};
+
 const HIDE_LAYOUT_SEGMENTS = ['login', 'register', 'dashboard', 'about', 'list-project', 'send-form'];
 
 export default function RootLayout({ children }) {

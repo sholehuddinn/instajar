@@ -115,7 +115,7 @@ function Home() {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <img
-              src="/image/aku.JPG"
+              src="/image/aku.jpg"
               alt="Profile of Muhammad Fajar"
               className="w-80 h-80 rounded-full object-cover border-4 border-white shadow-lg"
             />
