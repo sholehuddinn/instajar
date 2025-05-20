@@ -1,26 +1,13 @@
 import { useState } from "react";
-import Image from "next/image";
-import {
-  Heart,
-  MessageCircle,
-  Share2,
-  Bookmark,
-  MoreHorizontal,
-  User,
-} from "lucide-react";
+
 import moment from "moment";
 
 const PostCard = ({ post }) => {
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
   const time = moment(post.created_at);
 
   return (
     <div className="bg-white rounded-md shadow mb-4 overflow-hidden">
-      
       <div className="p-3">
-        
-
         {/* Caption */}
         <div className="text-sm mb-1">
           <span className="font-semibold mr-1">{post.title}</span>

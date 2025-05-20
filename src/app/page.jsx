@@ -9,7 +9,7 @@ const page = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://notes-app-rosy-phi.vercel.app/api/notes/"
+        "https://notes-app-rosy-phi.vercel.app/api/notes"
       );
 
       if (!response.ok) {
