@@ -76,7 +76,7 @@ const AboutPage = () => {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 uppercase flex items-center gap-2">
               <Users className="w-8 h-8 text-green-600" />
-              HIMATIFTA
+              JSX
             </h2>
             <p className="text-gray-800 text-lg leading-relaxed mb-3">
               Event Next.js ini di lakukan dalam 8x pertemuan dengan banyak

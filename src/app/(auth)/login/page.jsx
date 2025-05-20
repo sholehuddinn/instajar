@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Swal from "sweetalert2";
-import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [username, setusername] = useState("");
@@ -12,6 +12,8 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  
+  const router = useRouter()
 
   const handleSubmit = async () => {
     setError("");
@@ -36,6 +38,7 @@ export default function LoginPage() {
     } catch (error) {
       Swal.fire("error", error.message, "error");
     } finally {
+      router.push("/")
       Swal.fire("success", "Login Berhasil", "success");
     }
   };
