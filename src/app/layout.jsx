@@ -1,23 +1,31 @@
-// import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Nav from "@/components/footer";
-import Head from "@/components/header";
+'use client';
 
-export const metadata = {
-  title: "Instajar",
-  description: "bla bla bla",
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+import { useSelectedLayoutSegments } from 'next/navigation';
+import Head from "@/components/header";
+import Nav from "@/components/footer";
+import "./globals.css";
+
+// Daftar segmen yang tidak ingin menampilkan layout
+const HIDE_LAYOUT_SEGMENTS = ['login', 'register', 'dashboard', 'about', 'list-project', 'send-form'];
 
 export default function RootLayout({ children }) {
+  const segments = useSelectedLayoutSegments();
+
+  const hideLayout = segments.some(seg => HIDE_LAYOUT_SEGMENTS.includes(seg));
+
   return (
     <html lang="en">
       <body>
-        <Head />
-        <div className="mt-20 mb-20">{children}</div>
-        <Nav />
+        {/* Header */}
+        {!hideLayout && <Head />}
+
+        {/* Konten */}
+        <main className={hideLayout ? "" : "mt-20 mb-20"}>
+          {children}
+        </main>
+
+        {/* Footer */}
+        {!hideLayout && <Nav />}
       </body>
     </html>
   );

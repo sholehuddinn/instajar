@@ -89,9 +89,6 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-      <div className="fixed bottom-6 right-6 z-50">
-        <BtnNext title={"kehalaman selanjutnya"} route={"/list-project"} />
-      </div>
     </div>
   );
 };

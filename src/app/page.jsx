@@ -37,8 +37,8 @@ const page = () => {
     <div className="bg-gray-50 min-h-screen">
       <main className="container mx-auto px-4 pt-16 pb-16 max-w-md">
         <div className="space-y-4">
-          {data.map((post) => (
-            <PostCard key={post.id} post={post} />
+          {data.map((post, id) => (
+            <PostCard key={id} post={post} />
           ))}
         </div>
       </main>

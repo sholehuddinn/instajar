@@ -21,6 +21,9 @@ const Page = () => {
         setUserId(payload.userId);
         setToken(token);
       }
+    } else {
+      window.location.href = "/login";
+      Swal.fire("Warning", "Silakan login terlebih dahulu", "warning");
     }
   }, []);
 
