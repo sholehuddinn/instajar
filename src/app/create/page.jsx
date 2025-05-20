@@ -9,8 +9,6 @@ import  jwt  from "jsonwebtoken";
 const page = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
   const [isPosting, setIsPosting] = useState(false);
 
   const [userId, setUserId] = useState("")
@@ -45,7 +43,7 @@ const page = () => {
             "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify({
-            id_user: "userId",
+            id_user: userId,
             title,
             content,
           }),
