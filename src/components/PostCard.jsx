@@ -10,7 +10,7 @@ const PostCard = ({ post }) => {
       <div className="p-3">
         {/* Caption */}
         <div className="text-sm mb-1">
-          <span className="font-semibold mr-1">{post.title}</span>
+          <span className="font-semibold mr-1">{post.title} . {post.nm_lengkap}</span>
           <br />
           {post.content}
         </div>

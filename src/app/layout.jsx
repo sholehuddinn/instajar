@@ -1,39 +1,23 @@
-'use client';
 
-import { useSelectedLayoutSegments } from 'next/navigation';
-import Head from "@/components/header";
-import Nav from "@/components/footer";
 import "./globals.css";
+import LayoutWrapper from "@/components/my-components/layoutWrapper";
 
-
+// Metadata disediakan di sini
 export const metadata = {
   title: "instajar",
   description: "bla bla bla",
   icons: {
-    icon: "/image/aku2.jpg",
+    icon: "next.svg",
   },
 };
 
-const HIDE_LAYOUT_SEGMENTS = ['login', 'register', 'dashboard', 'about', 'list-project', 'send-form'];
-
 export default function RootLayout({ children }) {
-  const segments = useSelectedLayoutSegments();
-
-  const hideLayout = segments.some(seg => HIDE_LAYOUT_SEGMENTS.includes(seg));
-
   return (
     <html lang="en">
       <body>
-        {/* Header */}
-        {!hideLayout && <Head />}
-
-        {/* Konten */}
-        <main className={hideLayout ? "" : "mt-20 mb-20"}>
+        <LayoutWrapper>
           {children}
-        </main>
-
-        {/* Footer */}
-        {!hideLayout && <Nav />}
+        </LayoutWrapper>
       </body>
     </html>
   );
